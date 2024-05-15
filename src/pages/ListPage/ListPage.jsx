@@ -15,7 +15,7 @@ const ListPage =()=> {
 
         return (
             <div className="list-page">
-                <h1 className="list-page__title">Мой список</h1>
+                <h1 className="list-page__title">Mənim siyahım</h1>
                 <ul>
                     {this.state.movies.map((item) => {
                         return (

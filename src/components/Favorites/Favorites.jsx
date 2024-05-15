@@ -4,7 +4,7 @@ import './Favorites.css';
 
 const Favorites =  ()=> {
    const [state,setState] =  useState({
-        title: 'Новый список',
+        title: 'Yeni siyahı',
         movies: [
             { imdbID: 'tt0068646', title: 'The Godfather', year: 1972 }
         ]
@@ -16,7 +16,7 @@ const Favorites =  ()=> {
                         return <li key={item.id}>{item.title} ({item.year})</li>;
                     })}
                 </ul>
-                <button type="button" className="favorites__save">Сохранить список</button>
+                <button type="button" className="favorites__save" >Siyahını saxla</button>
             </div>
         );
 }
