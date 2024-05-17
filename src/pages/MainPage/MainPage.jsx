@@ -1,11 +1,24 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import './MainPage.css';
 import Header from '../../components/Header/Header';
 import SearchBox from '../../components/SearchBox/SearchBox';
 import Movies from '../../components/Movies/Movies';
 import Favorites from '../../components/Favorites/Favorites';
+import { useDispatch } from 'react-redux';
+import { createNewList } from '../../redux/moviesSlice';
+import { useNavigate } from 'react-router-dom'; // Импортируем useNavigate здесь
 
 const MainPage = () => {
+    const [listName, setListName] = useState('');
+    const dispatch = useDispatch();
+    const navigate = useNavigate(); // Используем useNavigate здесь
+
+    const handleCreateList = () => {
+        if (listName.trim()) {
+            dispatch(createNewList({ name: listName, movies: [] }));
+            navigate(`/list/${listName}`);
+        }
+    };
 
     return (
         <div className="main-page">
@@ -21,11 +34,19 @@ const MainPage = () => {
                 </section>
                 <aside className="main-page__favorites">
                     <Favorites />
+                    <div className="main-page__create-list">
+                        <input
+                            type="text"
+                            placeholder="Название списка"
+                            value={listName}
+                            onChange={(e) => setListName(e.target.value)}
+                        />
+                        <button onClick={handleCreateList}>Создать список</button>
+                    </div>
                 </aside>
             </main>
         </div>
     );
-
-}
+};
 
 export default MainPage;

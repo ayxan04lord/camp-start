@@ -1,7 +1,8 @@
-import { configureStore } from '@reduxjs/toolkit'
-import MoviesReducer from '../reducer/MoviesReducer'
-export const Store = configureStore({
+import { configureStore } from '@reduxjs/toolkit';
+import MoviesReducer from '../reducer/MoviesReducer'; // Убедись, что путь к файлу правильный
+
+export const store = configureStore({
   reducer: {
-    MovieList: MoviesReducer,
+    movies: MoviesReducer, // Используем MoviesReducer
   },
-})
+});

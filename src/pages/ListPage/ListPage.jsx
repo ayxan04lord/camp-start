@@ -1,23 +1,30 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import './ListPage.css';
+import { useSelector } from 'react-redux';
 
 const ListPage = () => {
+    const movies = useSelector((state) => state.movies.lists); // Получаем список фильмов из Redux store
 
+    console.log(movies,"fuerhfi")
     return (
         <div className="list-page">
             <h1 className="list-page__title">Мой список</h1>
             <ul>
-                {state.movies.map((item) => {
-                    return (
-                        <li key={item.imdbID}>
-                            <a href="https://www.imdb.com/title/tt0068646/" target="_blank">{item.title} ({item.year})</a>
-                        </li>
-                    );
-                })}
+                {movies.map((list) => (
+                    <li key={list.name}>
+                        <h3>{list.name}</h3>
+                        <ul>
+                            {list.movies.map((movie) => (
+                                <li key={movie.imdbID}>
+                                    <a href={`https://www.imdb.com/title/${movie.imdbID}`} target="_blank" rel="noreferrer">{movie.Title} ({movie.Year})</a>
+                                </li>
+                            ))}
+                        </ul>
+                    </li>
+                ))}
             </ul>
         </div>
     );
-
-}
+};
 
 export default ListPage;

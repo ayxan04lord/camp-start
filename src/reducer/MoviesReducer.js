@@ -42,13 +42,18 @@ const initialState = {
     isLoading: false,
     data: [],
     favorites: [],
-    error: false
+    error: false,
+    lists: []
 };
 
 export const moviesSlice = createSlice({
     name: "movies",
     initialState,
-    reducers: {},
+    reducers: {
+        createNewList: (state, action) => {
+            state.lists.push(action.payload);
+        },
+    },
     extraReducers: (builder) => {
         builder.addCase(fetchMovie.pending, (state) => {
             state.isLoading = true;

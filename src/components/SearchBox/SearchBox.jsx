@@ -1,24 +1,23 @@
-import React, { Component, useState } from 'react';
+import React, { useState } from 'react';
 import './SearchBox.css';
 import { useDispatch } from 'react-redux';
 import { fetchMovie } from '../../reducer/MoviesReducer';
 
+
 const SearchBox = () => {
-    const dispatch = useDispatch()
-    const [state, setState] = useState({
-        searchLine: ''
-    }
-    )
+    const dispatch = useDispatch();
+    const [searchLine, setSearchLine] = useState('');
 
     const searchLineChangeHandler = (e) => {
-        setState({ searchLine: e.target.value });
-    }
+        setSearchLine(e.target.value);
+    };
+
     const searchBoxSubmitHandler = (e) => {
         e.preventDefault();
-        dispatch(fetchMovie(state.searchLine))
-    }
-
-    const { searchLine } = state;
+        if (searchLine.trim()) {
+            dispatch(fetchMovie(searchLine)); // Убедись, что fetchMovie определен в moviesSlice
+        }
+    };
 
     return (
         <div className="search-box">
@@ -34,17 +33,15 @@ const SearchBox = () => {
                     />
                 </label>
                 <button
-                    onClick={searchBoxSubmitHandler}
                     type="submit"
                     className="search-box__form-submit"
-                    disabled={!searchLine}
+                    disabled={!searchLine.trim()}
                 >
                     Искать
                 </button>
             </form>
         </div>
     );
-
-}
+};
 
 export default SearchBox;
