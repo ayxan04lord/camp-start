@@ -1,42 +1,50 @@
-import React, { useState } from 'react';
+import React, { Component, useState } from 'react';
 import './SearchBox.css';
+import { useDispatch } from 'react-redux';
+import { fetchMovie } from '../../reducer/MoviesReducer';
 
-const SearchBox = ({ onSearch }) => {
-    const [searchLine, setSearchLine] = useState('');
+const SearchBox = () => {
+    const dispatch = useDispatch()
+    const [state, setState] = useState({
+        searchLine: ''
+    }
+    )
 
     const searchLineChangeHandler = (e) => {
-        setSearchLine(e.target.value);
-    };
-
+        setState({ searchLine: e.target.value });
+    }
     const searchBoxSubmitHandler = (e) => {
         e.preventDefault();
-        onSearch(searchLine);
-    };
+        dispatch(fetchMovie(state.searchLine))
+    }
+
+    const { searchLine } = state;
+
     return (
         <div className="search-box">
             <form className="search-box__form" onSubmit={searchBoxSubmitHandler}>
                 <label className="search-box__form-label">
-                    Film axtarın:
+                    Искать фильм по названию:
                     <input
                         value={searchLine}
                         type="text"
                         className="search-box__form-input"
-                        placeholder="Məsələn, Shawshank Redemption"
+                        placeholder="Например, Shawshank Redemption"
                         onChange={searchLineChangeHandler}
-                        id='search_axan'
                     />
                 </label>
                 <button
+                    onClick={searchBoxSubmitHandler}
                     type="submit"
                     className="search-box__form-submit"
                     disabled={!searchLine}
-                    onClick={() => getMovies(document.getElementById("search_axan").value)}
                 >
-                    Axtar
+                    Искать
                 </button>
             </form>
         </div>
     );
-};
+
+}
 
 export default SearchBox;
