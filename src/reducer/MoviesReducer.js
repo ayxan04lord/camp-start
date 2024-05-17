@@ -29,9 +29,9 @@ export const removeFromFavorites = createAsyncThunk('movies/removeFromFavorites'
 export const saveFavoritesList = createAsyncThunk('movies/saveFavoritesList', async (favorites) => {
     try {
         const response = await axios.post('https://acb-api.algoritmika.org/api/movies/list', {
-            title: 'Favorites List',
-            movies: favorites.map(movie => movie.imdbID)
+            favorites
         });
+        console.log('Data after POST:', response.data); // Выводим данные на консоль
         return response.data;
     } catch (error) {
         throw error;

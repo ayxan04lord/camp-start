@@ -3,7 +3,11 @@ import './ListPage.css';
 import { useSelector } from 'react-redux';
 
 const ListPage = () => {
-    const movies = useSelector((state) => state.movies.lists); // Получаем список фильмов из Redux store
+    const movies = useSelector((state) => state.movies.lists);
+
+    const saalm = useSelector(state => state.movies)
+
+    console.log(saalm)
 
     console.log(movies,"fuerhfi")
     return (

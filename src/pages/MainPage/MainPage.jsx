@@ -6,12 +6,12 @@ import Movies from '../../components/Movies/Movies';
 import Favorites from '../../components/Favorites/Favorites';
 import { useDispatch } from 'react-redux';
 import { createNewList } from '../../redux/moviesSlice';
-import { useNavigate } from 'react-router-dom'; // Импортируем useNavigate здесь
+import { useNavigate } from 'react-router-dom'; 
 
 const MainPage = () => {
     const [listName, setListName] = useState('');
     const dispatch = useDispatch();
-    const navigate = useNavigate(); // Используем useNavigate здесь
+    const navigate = useNavigate(); 
 
     const handleCreateList = () => {
         if (listName.trim()) {

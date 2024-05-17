@@ -15,7 +15,7 @@ const SearchBox = () => {
     const searchBoxSubmitHandler = (e) => {
         e.preventDefault();
         if (searchLine.trim()) {
-            dispatch(fetchMovie(searchLine)); // Убедись, что fetchMovie определен в moviesSlice
+            dispatch(fetchMovie(searchLine)); 
         }
     };
 
